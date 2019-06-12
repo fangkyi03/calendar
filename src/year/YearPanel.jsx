@@ -15,8 +15,9 @@ function goYear(direction) {
 function chooseYear(year) {
   const value = this.state.value.clone();
   value.year(year);
-  value.month(this.state.value.month());
+  value.month(this.state.value.month());  
   this.props.onSelect(value);
+  this.setState({selectYear:year})
 }
 
 export default class YearPanel extends React.Component {
@@ -25,6 +26,7 @@ export default class YearPanel extends React.Component {
     this.prefixCls = `${props.rootPrefixCls}-year-panel`;
     this.state = {
       value: props.value || props.defaultValue,
+      selectYear:null
     };
     this.nextDecade = goYear.bind(this, 10);
     this.previousDecade = goYear.bind(this, -10);
@@ -54,7 +56,7 @@ export default class YearPanel extends React.Component {
   }
   render() {
     const props = this.props;
-    const value = this.state.value;
+    const { value, selectYear} = this.state
     const { locale, renderFooter } = props;
     const years = this.years();
     const currentYear = value.year();
@@ -66,6 +68,7 @@ export default class YearPanel extends React.Component {
       const tds = row.map(yearData => {
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
+          [`${prefixCls}-select-item`]: yearData.year == selectYear,
           [`${prefixCls}-selected-cell`]: yearData.year === currentYear,
           [`${prefixCls}-last-decade-cell`]: yearData.year < startYear,
           [`${prefixCls}-next-decade-cell`]: yearData.year > endYear,
@@ -115,7 +118,7 @@ export default class YearPanel extends React.Component {
               title={locale.decadeSelect}
             >
               <span className={`${prefixCls}-decade-select-content`}>
-                {startYear}-{endYear}
+                {selectYear ? selectYear :  `${startYear}-${endYear}`} 
               </span>
               <span className={`${prefixCls}-decade-select-arrow`}>x</span>
             </a>

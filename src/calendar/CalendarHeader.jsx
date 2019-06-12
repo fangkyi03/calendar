@@ -155,7 +155,7 @@ export default class CalendarHeader extends React.Component {
       disabledMonth,
       renderFooter,
     } = props;
-
+    console.log('输出mode',mode)
     let panel = null;
     if (mode === 'month') {
       panel = (

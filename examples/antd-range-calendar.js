@@ -55,7 +55,6 @@ function disabledDate(current) {
 }
 
 function disabledTime(time, type) {
-  console.log('disabledTime', time, type);
   if (type === 'start') {
     return {
       disabledHours() {
@@ -134,6 +133,7 @@ class Demo extends React.Component {
     const state = this.state;
     const calendar = (
       <RangeCalendar
+        mode={['year','year']}
         hoverValue={state.hoverValue}
         onHoverChange={this.onHoverChange}
         showWeekNumber={false}
@@ -186,6 +186,7 @@ ReactDOM.render(
         disabledDate={disabledDate}
         timePicker={timePickerElement}
         disabledTime={disabledTime}
+        mode={['year','year']}
         renderFooter={() => <span>extra footer</span>}
       />
     </div>

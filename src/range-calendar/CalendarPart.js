@@ -85,7 +85,7 @@ export default class CalendarPart extends React.Component {
         clearIcon={clearIcon}
         inputMode={inputMode}
       />;
-
+    console.log('输出mode1', mode)
     return (
       <div
         className={`${rangeClassName}-part ${rangeClassName}-${direction}`}
